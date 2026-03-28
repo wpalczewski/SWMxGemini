@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcane Waver</title>
+    <!-- MediaPipe API -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Main Menu Overlay -->
+        <div id="main-menu" class="fullscreen-overlay">
+            <div id="main-logo">
+                <h1 class="main-title">Arcane Waver</h1>
+            </div>
+            
+            <div class="menu-buttons">
+                <button id="btn-practice" class="retro-btn">Practice Tool</button>
+                <button id="btn-waves" class="retro-btn primary-btn">Wave Defense</button>
+            </div>
+            <div class="menu-footer">Initialize Camera & Calibrate Gestures on Start</div>
+        </div>
+
+        <!-- Main Game Battlefield (Hidden Initially) -->
+        <main id="battlefield" style="display: none;">
+            <canvas id="game-canvas"></canvas>
+            
+            <!-- Floating Runes Layer -->
+            <div id="rune-container">
+                <div id="active-rune"></div>
+            </div>
+
+            <!-- Combo & Spells HUD -->
+            <div class="hud top-center">
+                <h1 class="game-title">Arcane Waver</h1>
+                <div id="combo-display">Element: <span id="current-element">None</span></div>
+                <div id="master-spell-alert"></div>
+            </div>
+
+            <!-- Score HUD -->
+            <div id="score-hud">
+                <div id="score-display">SCORE: <span id="score-value">0</span></div>
+                <div id="wave-display">WAVE: <span id="wave-value">-</span></div>
+            </div>
+
+            <!-- Wave Announcement Banner -->
+            <div id="wave-banner" class="fullscreen-overlay hidden" style="pointer-events:none;">
+                <div id="wave-banner-text">WAVE 1</div>
+                <div id="wave-countdown">3</div>
+            </div>
+
+            <!-- Game Over Screen -->
+            <div id="game-over" class="fullscreen-overlay hidden">
+                <h1 class="main-title" style="color:#ff2255;">GAME OVER</h1>
+                <div id="go-score" style="margin: 20px 0; font-family:'Press Start 2P',cursive; font-size:1.1rem; color:#f5d061;">FINAL SCORE: <span id="go-score-value">0</span></div>
+                <div id="go-wave" style="margin-bottom: 30px; font-family:'Press Start 2P',cursive; font-size:0.8rem; color:#a275ff;">REACHED WAVE: <span id="go-wave-value">1</span></div>
+                <button id="btn-restart" class="retro-btn primary-btn">Play Again</button>
+                <button id="btn-go-menu" class="retro-btn danger-btn" style="margin-top:14px;">Main Menu</button>
+            </div>
+            
+            <!-- Tactical Mirror -->
+            <div class="tactical-mirror bottom-right retro-panel">
+                <div class="mirror-header">Tactical Mirror (Spirit Hands)</div>
+                <div class="mirror-content">
+                    <video id="webcam" style="display: none;" playsinline></video>
+                    <canvas id="vision-canvas" width="320" height="240"></canvas>
+                </div>
+            </div>
+        </main>
+
+        <!-- Settings Modal (Hidden by Default) -->
+        <div id="settings-menu" class="hidden retro-panel">
+            <h2>System Settings</h2>
+            <div class="setting-item">
+                <label>
+                    <input type="checkbox" id="toggle-mirror" checked>
+                    Show Tactical Mirror (Webcam)
+                </label>
+            </div>
+            <div class="setting-item">
+                <label>
+                    <input type="checkbox" id="toggle-devtools">
+                    Developer Tools
+                </label>
+            </div>
+            <!-- Dev Tools Panel (hidden by default) -->
+            <div id="devtools-panel" style="display:none; margin-top: 10px; border-top: 2px solid #4a3628; padding-top: 10px;">
+                <div id="debug-log" style="color: #0f0; font-family: monospace; font-size: 11px; max-width: 340px; max-height: 180px; overflow-y: auto; text-shadow: 1px 1px 0 #000; white-space: pre-wrap;"></div>
+            </div>
+            
+            <button id="btn-quit" class="retro-btn danger-btn" style="margin-top: 20px;">Quit to Main Menu</button>
+            <div class="settings-hint">Press <span>ESC</span> to close</div>
+        </div>
+    </div>
+
+    <!-- Modules -->
+    <script src="vision.js" type="module"></script>
+    <script src="main.js" type="module"></script>
+</body>
+</html>

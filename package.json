@@ -1,0 +1,17 @@
+{
+  "name": "arcane-waver",
+  "version": "1.0.0",
+  "description": "An AR elemental battle game with hand tracking (MediaPipe) and AI-driven map events.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@google/genai": "^1.46.0",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "ws": "^8.20.0"
+  }
+}
