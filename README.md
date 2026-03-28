@@ -1,4 +1,4 @@
-#  Arcane Waver: Elemental Battle AR
+#  Arcane Waver
 
 **Arcane Waver** is an immersive, browser-based AR magic battle game. It uses **MediaPipe Hands** to track your physical hand movements, allowing you to cast elemental spells through gestures and shapes in mid-air.
 
