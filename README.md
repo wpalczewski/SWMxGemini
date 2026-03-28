@@ -15,7 +15,7 @@ Fight off waves of enemies (Slimes) in **Wave Defense** or hone your skills in t
 ### 2. Installation
 ```bash
 # Clone or download the repository
-cd arcane-waver
+cd SWMxGemini
 
 # Install dependencies
 npm install
